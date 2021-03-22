@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodayList from "./Components/TodayList";
+import CreateTaskForm from "./Components/CreateTaskForm";
 
 class App extends Component {
   
@@ -15,10 +16,22 @@ class App extends Component {
       }
     ]
   }
+
+  addTask = (title, details) => {
+    let newTask = { title: title, details: details };
+    let tasks = this.state.tasks;
+    tasks.push(newTask);
+    this.setState({ tasks: tasks });
+  };
   
   
   render() {
-    return <TodayList tasks ={this.state.tasks} />;
+    return (
+      <div className="App">
+        <CreateTaskForm addTask={this.addTask}/>
+        <TodayList tasks={this.state.tasks} />
+      </div>
+    );
   }
 }
 
